@@ -4,7 +4,6 @@ from pages.home_page import HomePage
 import data
 
 class TestHomePage:
-    driver = None
 
     @classmethod
     def setup_class(cls):
