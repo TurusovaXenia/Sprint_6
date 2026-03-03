@@ -1,7 +1,9 @@
+import allure
 import pytest
 from selenium import webdriver
-from pages.home_page import HomePage
+
 import data
+from pages.home_page import HomePage
 
 
 class TestHomePage:
@@ -11,6 +13,8 @@ class TestHomePage:
         cls.driver = webdriver.Firefox()
 
     @pytest.mark.parametrize("index, expected_text", data.dropdown_list_options)
+    @allure.title("Проверка списка в разделе 'О важном'")
+    @allure.description("Для каждого вопроса в разделе открываем его текст и проверяем на соответствие")
     def test_faq_question_shows_correct_answer(self, index, expected_text):
         self.driver.get(data.base_url)
         home_page = HomePage(self.driver)

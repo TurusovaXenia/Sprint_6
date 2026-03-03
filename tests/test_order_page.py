@@ -1,3 +1,4 @@
+import allure
 import pytest
 from selenium import webdriver
 
@@ -20,6 +21,9 @@ class TestOrderPage:
             (HomePageLocators.ORDER_BUTTON, data.user_2)
         ],
     )
+    @allure.title("Проверка успешного создания заказа для двух точек входа")
+    @allure.description(
+        "Проходим весь позитивный флоу для создания заказа, проверяем редиректы на страницы при нажатии на лого")
     def test_order_creation_from_different_entry_points(self, open_button, user_data):
         self.driver.get(data.base_url)
         order_page = OrderPage(self.driver)
