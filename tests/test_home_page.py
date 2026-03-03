@@ -3,6 +3,7 @@ from selenium import webdriver
 from pages.home_page import HomePage
 import data
 
+
 class TestHomePage:
 
     @classmethod
@@ -10,14 +11,15 @@ class TestHomePage:
         cls.driver = webdriver.Firefox()
 
     @pytest.mark.parametrize("index, expected_text", data.dropdown_list_options)
-    def test_dropdown_list_items(self, index, expected_text):
-        self.driver.get('https://qa-scooter.praktikum-services.ru/')
+    def test_faq_question_shows_correct_answer(self, index, expected_text):
+        self.driver.get(data.base_url)
         home_page = HomePage(self.driver)
+
         home_page.click_cookies_button()
+        text = home_page.get_faq_text_by_index(index)
 
-        item = home_page.get_item_by_index(index)
-
-        assert item.text == expected_text, f"Ошибка в тексте элемента {index}"
+        assert text == expected_text, \
+            f"Ошибка в тексте элемента {index}"
 
     @classmethod
     def teardown_class(cls):

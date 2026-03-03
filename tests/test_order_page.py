@@ -1,10 +1,11 @@
 import pytest
 from selenium import webdriver
 
-from pages.order_page import OrderPage
+import data
 from locators.base_page_locators import BasePageLocators
 from locators.home_page_locators import HomePageLocators
-import data
+from pages.order_page import OrderPage
+
 
 class TestOrderPage:
 
@@ -20,8 +21,9 @@ class TestOrderPage:
         ],
     )
     def test_order_creation_from_different_entry_points(self, open_button, user_data):
-        self.driver.get('https://qa-scooter.praktikum-services.ru/')
+        self.driver.get(data.base_url)
         order_page = OrderPage(self.driver)
+
         order_page.click_cookies_button()
         order_page.click_order_button(open_button)
         order_page.fill_order_form(user_data)
@@ -33,13 +35,16 @@ class TestOrderPage:
 
         order_page.click_check_status_button()
         order_page.click_logo_scooter()
-        assert self.driver.current_url == "https://qa-scooter.praktikum-services.ru/"
+        assert self.driver.current_url == data.base_url, \
+            "Переход на главную страницу не выполнен"
 
         main_window = self.driver.current_window_handle
         order_page.click_logo_yandex()
-        order_page.switch_to_new_tab_and_verify(main_window, "dzen.ru")
+        order_page.switch_to_new_tab_and_verify(main_window, data.expected_page_url)
 
-        assert "dzen.ru" in self.driver.current_url
+        assert data.expected_page_url in self.driver.current_url, \
+            "Переход на страницу Дзена не выполнен"
+
         order_page.close_current_tab_and_switch_back(main_window)
 
     @classmethod

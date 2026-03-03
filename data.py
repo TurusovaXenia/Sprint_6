@@ -1,4 +1,7 @@
-#for test_dropdown_list_items test method
+base_url = "https://qa-scooter.praktikum-services.ru/"
+expected_page_url = "dzen.ru"
+
+# for test_dropdown_list_items test method
 dropdown_list_options = [
     (0, "Сутки — 400 рублей. Оплата курьеру — наличными или картой."),
     (1,
@@ -13,7 +16,7 @@ dropdown_list_options = [
     (7, "Да, обязательно. Всем самокатов! И Москве, и Московской области."),
 ]
 
-#for test_order_creation_from_different_entry_points test method
+# for test_order_creation_from_different_entry_points test method
 user_1 = {
     "name": "Алиса",
     "surname": "Петрова",
