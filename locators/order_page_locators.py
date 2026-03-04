@@ -7,13 +7,13 @@ class OrderPageLocators:
     ADDRESS_FIELD = (By.XPATH, ".//input[@placeholder='* Адрес: куда привезти заказ']")
     PHONE_NUMBER_FIELD = (By.XPATH, ".//input[@placeholder='* Телефон: на него позвонит курьер']")
 
-    STATION_DROPDOWN_LIST_BUTTON = (By.CSS_SELECTOR, ".select-search__input")
+    STATION_DROPDOWN_LIST_FIELD = (By.CSS_SELECTOR, ".select-search__input")
     STATION_DROPDOWN_LIST_ITEMS = (By.CSS_SELECTOR, ".select-search__row")
 
     ORDER_HEADER = (By.CSS_SELECTOR, "div[class*='Order_Header']")
 
     DATE_FIELD = (By.CSS_SELECTOR, ".react-datepicker__input-container input")
-    RENTAL_PERIOD_DROPDOWN_LIST_BUTTON = (By.CLASS_NAME, "Dropdown-root")
+    RENTAL_PERIOD_DROPDOWN_LIST_FIELD = (By.CLASS_NAME, "Dropdown-root")
     RENTAL_PERIOD_DROPDOWN_LIST_ITEMS = (By.CLASS_NAME, "Dropdown-option")
     COLOR_CHECKBOX = (By.ID, "black")
     COMMENT_INPUT = (By.XPATH, ".//input[@placeholder='Комментарий для курьера']")

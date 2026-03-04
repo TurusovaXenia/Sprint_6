@@ -43,5 +43,9 @@ class BasePage:
     @allure.step("Принять использование cookie")
     def click_cookies_button(self):
         cookies_button = self.driver.find_elements(*BasePageLocators.COOKIES_BUTTON)
-        if len(cookies_button) == 1:
+        if len(cookies_button) > 0:
             cookies_button[0].click()
+
+    def fill_input(self, locator, text):
+        element = self.wait.until(EC.visibility_of_element_located(locator))
+        element.send_keys(text)

@@ -17,3 +17,7 @@ class HomePage(BasePage):
         faq_item_text = self.wait.until(
             EC.presence_of_all_elements_located(HomePageLocators.DROPDOWN_OPTIONS))[index]
         return self.wait.until(EC.visibility_of(faq_item_text)).text
+
+    @allure.step("Клик по кнопке 'Заказать'")
+    def click_order_button(self, button_locator):
+        self.click_element(button_locator)

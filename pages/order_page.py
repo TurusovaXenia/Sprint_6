@@ -10,16 +10,8 @@ from pages.base_page import BasePage
 
 class OrderPage(BasePage):
 
-    @allure.step("Клик по кнопке 'Заказать'")
-    def click_order_button(self, button_locator):
-        self.click_element(button_locator)
-
-    def fill_input(self, locator, text):
-        element = self.wait.until(EC.visibility_of_element_located(locator))
-        element.send_keys(text)
-
-    def select_random_item_from_dropdown(self, button_locator, items_locator):
-        self.click_element(button_locator)
+    def select_random_item_from_dropdown(self, field_locator, items_locator):
+        self.click_element(field_locator)
         options = self.wait.until(
             EC.presence_of_all_elements_located(items_locator))
 
@@ -37,7 +29,7 @@ class OrderPage(BasePage):
     @allure.step("Выбор рандомной станции метро")
     def set_customer_station(self):
         self.select_random_item_from_dropdown(
-            OrderPageLocators.STATION_DROPDOWN_LIST_BUTTON,
+            OrderPageLocators.STATION_DROPDOWN_LIST_FIELD,
             OrderPageLocators.STATION_DROPDOWN_LIST_ITEMS
         )
 
@@ -54,7 +46,7 @@ class OrderPage(BasePage):
     @allure.step("Выбор рандомного периода аренды")
     def set_rental_period(self):
         self.select_random_item_from_dropdown(
-            OrderPageLocators.RENTAL_PERIOD_DROPDOWN_LIST_BUTTON,
+            OrderPageLocators.RENTAL_PERIOD_DROPDOWN_LIST_FIELD,
             OrderPageLocators.RENTAL_PERIOD_DROPDOWN_LIST_ITEMS
         )
 
