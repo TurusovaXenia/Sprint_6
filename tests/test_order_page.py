@@ -1,6 +1,5 @@
 import allure
 import pytest
-from selenium import webdriver
 
 import data
 from locators.base_page_locators import BasePageLocators
@@ -10,11 +9,7 @@ from pages.order_page import OrderPage
 
 
 class TestOrderPage:
-
-    @classmethod
-    def setup_class(cls):
-        cls.driver = webdriver.Firefox()
-        cls.driver.get(data.base_url)
+    driver = None
 
     @pytest.mark.parametrize(
         'open_button, user_data',
@@ -26,7 +21,7 @@ class TestOrderPage:
     @allure.title("Проверка успешного создания заказа для двух точек входа")
     @allure.description(
         "Проходим весь позитивный флоу для создания заказа, проверяем редиректы на страницы при нажатии на лого")
-    def test_order_creation_from_different_entry_points(self, open_button, user_data):
+    def test_order_creation_from_different_entry_points(self, open_button, user_data, setup):
         home_page = HomePage(self.driver)
         home_page.click_cookies_button()
         home_page.click_order_button(open_button)
@@ -44,16 +39,8 @@ class TestOrderPage:
         assert self.driver.current_url == data.base_url, \
             "Переход на главную страницу не выполнен"
 
-        main_window = self.driver.current_window_handle
-        try:
-            order_page.click_logo_yandex()
-            order_page.switch_to_new_tab_and_verify(main_window, data.expected_page_url)
+        order_page.click_logo_yandex()
+        order_page.switch_to_new_tab_and_verify(data.expected_page_url)
 
-            assert data.expected_page_url in self.driver.current_url, \
+        assert data.expected_page_url in self.driver.current_url, \
                 "Переход на страницу Дзена не выполнен"
-        finally:
-            order_page.close_current_tab_and_switch_back(main_window)
-
-    @classmethod
-    def teardown_class(cls):
-        cls.driver.quit()
