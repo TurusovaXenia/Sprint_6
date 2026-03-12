@@ -1,8 +1,5 @@
-base_url = "https://qa-scooter.praktikum-services.ru/"
-expected_page_url = "dzen.ru"
-
 # for test_dropdown_list_items test method
-dropdown_list_options = [
+question_answer = [
     (0, "Сутки — 400 рублей. Оплата курьеру — наличными или картой."),
     (1,
      "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим."),

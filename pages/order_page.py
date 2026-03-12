@@ -1,23 +1,12 @@
-import random
 from datetime import datetime, timedelta
 
 import allure
-from selenium.webdriver.support import expected_conditions as EC
 
 from locators.order_page_locators import OrderPageLocators
 from pages.base_page import BasePage
 
 
 class OrderPage(BasePage):
-
-    def select_random_item_from_dropdown(self, field_locator, items_locator):
-        self.click_element(field_locator)
-        options = self.wait.until(
-            EC.presence_of_all_elements_located(items_locator))
-
-        random_option = random.choice(options)
-        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", random_option)
-        random_option.click()
 
     @allure.step("Ввод данных клиента")
     def fill_customer_info(self, name, surname, address, phone):
@@ -60,8 +49,7 @@ class OrderPage(BasePage):
 
     @allure.step("Получение сообщения из модального окна")
     def get_successful_message(self):
-        modal = self.wait.until(
-            EC.visibility_of_element_located(OrderPageLocators.SUCCESS_MODAL))
+        modal = self.wait_until_visible(OrderPageLocators.SUCCESS_MODAL)
         return modal.text
 
     @allure.step("Заполнение формы для заказа")
