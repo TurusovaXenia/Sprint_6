@@ -8,7 +8,7 @@ class Header(BasePage):
 
     @allure.step("Клик по лого 'Яндекс'")
     def click_logo_yandex(self):
-        self.driver.execute_script("scroll(0, 0);")
+        self.scroll_to_header()
         self.click_element(HeaderLocators.LOGO_YANDEX_LINK)
 
     @allure.step("Клик по лого скутера")
@@ -17,6 +17,6 @@ class Header(BasePage):
 
     @allure.step("Принять использование cookie")
     def click_cookies_button(self):
-        cookies_button = self.driver.find_elements(*HeaderLocators.COOKIES_BUTTON)
+        cookies_button = self.find_elements_with_wait(HeaderLocators.COOKIES_BUTTON)
         if len(cookies_button) > 0:
             cookies_button[0].click()

@@ -21,6 +21,5 @@ class OrderPageLocators:
     NEXT_BUTTON = (By.CSS_SELECTOR, "div[class*='Order_NextButton'] button")
     CREATE_ORDER_BUTTON = (By.XPATH, ".//div[contains(@class, 'Order_Buttons')]/button[text()='Заказать']")
     CONFIRM_ORDER_BUTTON = (By.XPATH, ".//button[text()='Да']")
-    CHECK_STATUS_BUTTON = (By.CSS_SELECTOR, "div[class*='Order_NextButton'] button")
 
-    SUCCESS_MODAL = (By.CSS_SELECTOR, "div[class*='Order_Modal']")
+    SUCCESS_MESSAGE = (By.XPATH, ".//*[contains(text(), 'Заказ оформлен')]")
