@@ -42,6 +42,9 @@ class BasePage:
     def wait_until_visible(self, locator):
         return self.wait.until(EC.visibility_of_element_located(locator))
 
+    def wait_for_presence_of_all(self, locator):
+        return self.wait.until(EC.presence_of_all_elements_located(locator))
+
     def scroll_to_element(self, locator):
         element = self.wait_until_visible(locator)
         self.driver.execute_script("arguments[0].scrollIntoView();", element)

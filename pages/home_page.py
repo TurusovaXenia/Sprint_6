@@ -11,15 +11,12 @@ class HomePage(BasePage):
     @allure.step("Получить текст ответа для вопроса с индексом {index}")
     def get_faq_text_by_index(self, index):
         with allure.step("Кликаем на вопрос"):
-            faq_item = self.wait.until(
-                EC.presence_of_all_elements_located(HomePageLocators.QUESTION_BUTTONS))[index]
-
+            faq_item = self.wait_for_presence_of_all(HomePageLocators.QUESTION_BUTTONS) [index]
             self.scroll_to_element(HomePageLocators.QUESTION_LOCATOR_TO_SCROLL)
             self.click_element_js(faq_item)
 
         with allure.step("Получаем ответ на вопрос"):
-            faq_item_text = self.wait.until(
-                EC.presence_of_all_elements_located(HomePageLocators.ANSWER_LOCATOR))[index]
+            faq_item_text = self.wait_for_presence_of_all(HomePageLocators.ANSWER_LOCATOR) [index]
             return self.wait.until(EC.visibility_of(faq_item_text)).text
 
     @allure.step("Клик по кнопке 'Заказать'")
