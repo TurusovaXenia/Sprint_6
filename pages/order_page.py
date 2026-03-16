@@ -49,7 +49,7 @@ class OrderPage(BasePage):
 
     @allure.step("Проверка отображения окна об успешном создании заказа")
     def check_successful_modal(self):
-       return self.check_element_visibility(OrderPageLocators.SUCCESS_MESSAGE)
+        return self.check_element_visibility(OrderPageLocators.SUCCESS_MESSAGE)
 
     @allure.step("Заполнение формы для заказа")
     def fill_order_form(self, user_data):

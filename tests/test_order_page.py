@@ -3,22 +3,24 @@ import pytest
 
 import data
 import urls
+from locators.header_locators import HeaderLocators
+from locators.home_page_locators import HomePageLocators
 
 
 class TestOrderPage:
 
     @pytest.mark.parametrize(
-        'location, user_data',
+        'open_button, user_data',
         [
-            ("header", data.user_1),
-            ("body", data.user_2)
+            (HeaderLocators.ORDER_BUTTON, data.user_1),
+            (HomePageLocators.ORDER_BUTTON, data.user_2)
         ],
     )
     @allure.title("Проверка успешного создания заказа для двух точек входа")
     @allure.description(
         "Проходим весь позитивный флоу для создания заказа")
-    def test_order_creation_from_different_entry_points(self, location, user_data, home_page, order_page, header):
-        home_page.click_order_button(location)
+    def test_order_creation_from_different_entry_points(self, open_button, user_data, home_page, order_page, header):
+        home_page.click_order_button(open_button)
 
         order_page.fill_order_form(user_data)
         order_page.click_create_order_button()
@@ -29,7 +31,7 @@ class TestOrderPage:
 
     @allure.title("Проверка редиректа на главную страницу после клика на логотип 'Самоката'")
     def test_click_scooter_logo_redirects_to_home_page(self, home_page, header):
-        home_page.click_order_button("body")
+        home_page.click_order_button_header()
         header.click_logo_scooter()
 
         assert home_page.check_order_button_visibility(), \
